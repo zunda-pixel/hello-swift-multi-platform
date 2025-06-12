@@ -12,4 +12,9 @@ jobs:
       with:
         ndk-version: r26d
     - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}
-    - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}/../
+    - run: curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
+            tar zxf swiftly-$(uname -m).tar.gz && \
+            ./swiftly init --quiet-shell-followup && \
+            . "${SWIFTLY_HOME_DIR:-~/.local/share/swiftly}/env.sh" && \
+            hash -r
+    - run: swift --version
