@@ -12,4 +12,4 @@ jobs:
       with:
         ndk-version: r26d
     - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}
-    - run: swift --vesion
+    - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}/../
