@@ -12,7 +12,7 @@ jobs:
       with:
         ndk-version: r26d
     - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}
-    - run: apt-get update && apt-get install tar
+    - run: sudo apt-get update && sudo apt-get install tar
     - run: curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
             tar zxf swiftly-$(uname -m).tar.gz && \
             ./swiftly init --quiet-shell-followup && \
