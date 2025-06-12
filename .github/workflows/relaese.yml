@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: whereis swift
-    - run: sudo apt-get update
-    - run: sudo apt-get install -y curl
+    - run: apt-get update
+    - run: apt-get install -y curl
     - run: curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
     - run: ls -a
