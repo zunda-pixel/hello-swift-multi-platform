@@ -8,8 +8,8 @@ jobs:
     container: swift:latest
     steps:
     - uses: actions/checkout@v4
+    - uses: android-actions/setup-android@v3
+    - run: sdkmanager "ndk;27.2.12479018"
+    - run: echo "NDK path: $ANDROID_SDK_ROOT/ndk/27.2.12479018"
     - run: whereis swift
-    - run: apt-get update
-    - run: apt-get install -y curl
-    - run: curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
     - run: ls -a
