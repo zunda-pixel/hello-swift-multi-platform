@@ -4,11 +4,10 @@ on: push
 
 jobs:
   release:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: android-actions/setup-android@v3
-    - run: sdkmanager "ndk;27.2.12479018"
-    - run: echo $ANDROID_SDK_ROOT
+    - uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r27d
     - run: whereis swift
-    - run: ls -a
