@@ -8,6 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: nttld/setup-ndk@v1
+      id: setup-ndk
       with:
         ndk-version: r26d
+    - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}
     - run: whereis swift
