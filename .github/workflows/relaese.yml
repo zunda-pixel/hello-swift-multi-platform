@@ -18,7 +18,6 @@ jobs:
     - run: curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz
     - run: tar zxf swiftly-$(uname -m).tar.gz
     - run: ./swiftly init --quiet-shell-followup
-    - run: . "${SWIFTLY_HOME_DIR:-~/.local/share/swiftly}/env.sh"
     - run: hash -r
     - run: swift --version
   build-linux:
