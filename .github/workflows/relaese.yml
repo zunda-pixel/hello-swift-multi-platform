@@ -9,5 +9,5 @@ jobs:
     - uses: actions/checkout@v4
     - uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r27d
+        ndk-version: r26d
     - run: whereis swift
