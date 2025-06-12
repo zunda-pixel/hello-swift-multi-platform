@@ -29,7 +29,7 @@ jobs:
   build-macos:
     runs-on: macos-15
     steps:
-      - users: actions/checkout@v4
+      - uses: actions/checkout@v4
       - run: sudo xcode-select --switch /Applications/Xcode_16.4.app
       - run: swiftc -swift-version 6 -O hello.swift -o hello
       - run: ./hello
