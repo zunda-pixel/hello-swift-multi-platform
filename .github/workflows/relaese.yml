@@ -8,6 +8,10 @@ jobs:
     container: swift:latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
     - uses: android-actions/setup-android@v3
     - run: sdkmanager "ndk;27.2.12479018"
     - run: echo $ANDROID_SDK_ROOT
