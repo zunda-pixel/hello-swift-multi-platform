@@ -8,6 +8,7 @@ jobs:
     container: swift:latest
     steps:
     - uses: actions/checkout@v4
+    - run: whereis swift
+    - run : apt install curl
     - run: curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
     - run: ls -a
-    - run: whereis swift
