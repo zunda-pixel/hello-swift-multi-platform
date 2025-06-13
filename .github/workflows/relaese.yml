@@ -9,6 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: swift --version
+    - run: swiftc --swift-sdk aarch64-unknown-linux-android24 -O hello.swift hello
+    - run: ./hello
   build-linux:
     runs-on: ubuntu-latest
     container: swift:latest
