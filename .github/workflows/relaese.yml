@@ -21,7 +21,7 @@ jobs:
     - run: ls -la
     - run: tar -zxvf swift-6.1.2-RELEASE.tar.gz
     - run: |
-        ./swift-6.1.2-RELEASE/utils/build-script \
+        ./swift-swift-6.1.2-RELEASE/utils/build-script \
           -R \  # Build in ReleaseAssert mode.
           --android \  # Build for Android.
           --android-ndk ${{ steps.setup-ndk.outputs.ndk-path }} \  # Path to an Android NDK.
