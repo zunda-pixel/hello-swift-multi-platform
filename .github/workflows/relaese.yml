@@ -22,6 +22,7 @@ jobs:
     - run: tar -zxvf swift-6.1.2-RELEASE.tar.gz
     - run: |
         swiftc
+          .
           -tools-directory ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/ \
           -target aarch64-unknown-linux-android21 \ # Targeting Android aarch64 at API 21
           -sdk ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot \ # The SDK is the Android unified sysroot and the resource-dir is where you just built the Swift stdlib.
