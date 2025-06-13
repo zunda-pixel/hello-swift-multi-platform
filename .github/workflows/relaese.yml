@@ -5,7 +5,7 @@ on: push
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    container: registry.gitlab.com/finestructure/spi-images:android-6.2-latest
+    container: registry.gitlab.com/finestructure/spi-images:android-6.1-latest
     steps:
     - uses: actions/checkout@v4
     - run: swiftc -v -target aarch64-unknown-linux-android24 -o hello.swift hello
