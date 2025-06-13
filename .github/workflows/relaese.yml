@@ -18,6 +18,7 @@ jobs:
     - run: hash -r
     - run: swift --version
     - run: curl -O https://github.com/swiftlang/swift/archive/refs/tags/swift-6.1.2-RELEASE.zip
+    - run: ls -la
     - run: unzip swift-6.1.2-RELEASE.zip
     - run: |
         ./swift-6.1.2-RELEASE/utils/build-script \
