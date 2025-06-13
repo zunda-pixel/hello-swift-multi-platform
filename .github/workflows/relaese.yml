@@ -17,10 +17,9 @@ jobs:
     - run: ./swiftly init --quiet-shell-followup
     - run: hash -r
     - run: swift --version
-    - run: curl -O https://github.com/swiftlang/swift/archive/refs/tags/swift-6.1.2-RELEASE.zip
+    - run: curl -O https://github.com/swiftlang/swift/archive/refs/tags/swift-6.1.2-RELEASE.tar.gz
     - run: ls -la
-    - run: sudo apt-get update && sudo apt-get install p7zip-full
-    - run: 7z x -o . swift-6.1.2-RELEASE.zip
+    - run: tar zxf swift-6.1.2-RELEASE.tar.gz
     - run: |
         ./swift-6.1.2-RELEASE/utils/build-script \
           -R \  # Build in ReleaseAssert mode.
