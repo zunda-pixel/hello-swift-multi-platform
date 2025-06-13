@@ -12,14 +12,25 @@ jobs:
       with:
         ndk-version: r26d
     - run: ls -la ${{ steps.setup-ndk.outputs.ndk-path }}
-    # - run: sudo apt-get update && sudo apt-get install tar
-    - run: whereis tar
-    - run: tar --help
     - run: curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz
     - run: tar zxf swiftly-$(uname -m).tar.gz
     - run: ./swiftly init --quiet-shell-followup
     - run: hash -r
     - run: swift --version
+    - run: curl -O https://github.com/swiftlang/swift/archive/refs/tags/swift-6.1.2-RELEASE.zip
+    - run: unzip swift-6.1.2-RELEASE.zip
+    - run: ./swift-6.1.2-RELEASE/utils/build-script \
+              -R \                                       # Build in ReleaseAssert mode.
+              --android \                                # Build for Android.
+              --android-ndk ${{ steps.setup-ndk.outputs.ndk-path }} \                  # Path to an Android NDK.
+              --android-arch aarch64 \                   # Optionally specify Android architecture, alternately armv7 or x86_64
+              --android-api-level 21 \                   # The Android API level to target. Swift only supports 21 or greater.
+              --stdlib-deployment-targets=android-aarch64 \ # Only cross-compile the stdlib for Android, ie don't build the native stdlib for Linux
+              --native-swift-tools-path=$SWIFT_PATH \    # Path to your prebuilt Swift compiler
+              --native-clang-tools-path=$SWIFT_PATH \    # Path to a prebuilt clang compiler, one comes with the Swift toolchain
+              --build-swift-tools=0 \                    # Don't build the Swift compiler and other host tools
+              --build-llvm=0 \                           # Don't build the LLVM libraries, but generate some CMake files needed by the Swift stdlib build
+              --skip-build-cmark                         # Don't build the CommonMark library that's only needed by the Swift compiler
   build-linux:
     runs-on: ubuntu-latest
     container: swift:latest
