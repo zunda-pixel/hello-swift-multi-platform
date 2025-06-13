@@ -8,7 +8,6 @@ jobs:
     container: registry.gitlab.com/finestructure/spi-images:android-6.2-latest
     steps:
     - uses: actions/checkout@v4
-    - run: swift --version
     - run: swiftc -v -target aarch64-unknown-linux-android24 -o hello.swift hello
     - run: ./hello
   build-linux:
