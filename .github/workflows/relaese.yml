@@ -19,8 +19,7 @@ jobs:
     - run: swift --version
     - run: curl -L -O https://github.com/swiftlang/swift/archive/refs/tags/swift-6.1.2-RELEASE.tar.gz
     - run: ls -la
-    - run: gunzip swift-6.1.2-RELEASE.tar.gz
-    - run: tar xvf swift-6.1.2-RELEASE.tar
+    - run: tar -zxvf swift-6.1.2-RELEASE.tar.gz
     - run: |
         ./swift-6.1.2-RELEASE/utils/build-script \
           -R \  # Build in ReleaseAssert mode.
