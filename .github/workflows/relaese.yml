@@ -60,7 +60,6 @@ jobs:
             gzip -d "$file"
           done
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            artifacts/**/hello-*
+        run: gh release create ${{ github.ref_name }} ./artifacts/hello-* --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
