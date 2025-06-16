@@ -57,7 +57,7 @@ jobs:
           cd artifacts
           find ./ -maxdepth 3
           for dir in */ ; do
-            echo $dir
+            gzip -d $dir
           done
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
