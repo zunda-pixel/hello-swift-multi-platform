@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: swiftc -swift-version 6 -O hello.swift -o hello-android
-      - run: gzip hello-android
+      - run: tar -zcvf hello-android.tar.gz hello-android
       - uses: actions/upload-artifact@v4
         with:
           name: hello-android
-          path: hello-android.gz
+          path: hello-android.tar.gz
 
   build-linux:
     runs-on: ubuntu-latest
@@ -27,11 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: swiftc -swift-version 6 -O hello.swift -o hello-linux
-      - run: gzip hello-linux
+      - run: tar -zcvf hello-linux.tar.gz hello-linux
       - uses: actions/upload-artifact@v4
         with:
           name: hello-linux
-          path: hello-linux.zg
+          path: hello-linux.tar.gz
 
   build-macos:
     runs-on: macos-15
@@ -39,11 +39,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo xcode-select --switch /Applications/Xcode_16.4.app
       - run: swiftc -swift-version 6 -O hello.swift -o hello-macos
-      - run: gzip hello-macos
+      - run: tar -zcvf hello-macos.tar.gz hello-macos
       - uses: actions/upload-artifact@v4
         with:
           name: hello-macos
-          path: hello-macos.gz
+          path: hello-macos.tar.gz
 
   release:
     needs: [build-android, build-linux, build-macos]
@@ -56,7 +56,7 @@ jobs:
         run: |
           cd artifacts
           for dir in */ ; do
-            gunzip "$dir"/*.gz -d "$dir"
+            tar -zxvf "$dir"/*.tar.gz
           done
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
