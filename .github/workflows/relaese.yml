@@ -56,7 +56,7 @@ jobs:
         run: |
           cd artifacts
           for file in */*.gz; do
-            echo $file
+            echo "$file"
             gzip -d "$file"
           done
       - name: Create GitHub Release
