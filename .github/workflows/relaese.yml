@@ -62,6 +62,6 @@ jobs:
           done
           cd ../
       - name: Create GitHub Release
-        run: gh release create ${{ github.ref_name }} ./artifacts/*/hello-* --generate-notes
+        run: gh release create ${{ github.ref_name }} --generate-notes ./artifacts/*/hello-*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
