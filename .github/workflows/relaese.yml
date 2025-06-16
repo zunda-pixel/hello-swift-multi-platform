@@ -1,26 +1,65 @@
-name: CI
+name: Release
 
-on: push
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
     container: registry.gitlab.com/finestructure/spi-images:android-6.1-latest
     steps:
-    - uses: actions/checkout@v4
-    - run: swiftc -swift-version 6 -O hello.swift -o hello
-    - run: ./hello
+      - uses: actions/checkout@v4
+      - run: swiftc -swift-version 6 -O hello.swift -o hello-android
+      - run: zip hello-android.zip hello-android
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hello-android
+          path: hello-android.zip
+
   build-linux:
     runs-on: ubuntu-latest
     container: swift:latest
     steps:
       - uses: actions/checkout@v4
-      - run: swiftc -swift-version 6 -O hello.swift -o hello
-      - run: ./hello
+      - run: swiftc -swift-version 6 -O hello.swift -o hello-linux
+      - run: zip hello-linux.zip hello-linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hello-linux
+          path: hello-linux.zip
+
   build-macos:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - run: sudo xcode-select --switch /Applications/Xcode_16.4.app
-      - run: swiftc -swift-version 6 -O hello.swift -o hello
-      - run: ./hello
+      - run: swiftc -swift-version 6 -O hello.swift -o hello-macos
+      - run: zip hello-macos.zip hello-macos
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hello-macos
+          path: hello-macos.zip
+
+  release:
+    needs: [build-android, build-linux, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+      - name: Extract all zip files
+        run: |
+          cd artifacts
+          for dir in */ ; do
+            unzip "$dir"/*.zip -d "$dir"
+          done
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/**/hello-*
