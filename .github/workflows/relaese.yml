@@ -59,6 +59,7 @@ jobs:
             echo "$file"
             gzip -d "$file"
           done
+          cd ../
       - name: Create GitHub Release
         run: gh release create ${{ github.ref_name }} ./artifacts/hello-* --generate-notes
         env:
