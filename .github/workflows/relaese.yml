@@ -56,8 +56,8 @@ jobs:
         run: |
           cd artifacts
           find ./ -maxdepth 3
-          for dir in */ ; do
-            gzip -d $dir
+          for file in */*.gz; do
+            gzip -d "$file"
           done
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
