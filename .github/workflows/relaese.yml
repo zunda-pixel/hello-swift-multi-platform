@@ -46,16 +46,10 @@ jobs:
           path: hello-macos.gz
  
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          winget install --id Microsoft.VisualStudio.2022.Community --exact --force --custom
-          "
-          --add Microsoft.VisualStudio.Component.Windows11SDK.22000
-          --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64
-          --add Microsoft.VisualStudio.Component.VC.Tools.ARM64
-          "
+      - run: winget install --id Microsoft.VisualStudio.2022.Community --exact --force --custom "--add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.Tools.ARM64"
       - run: winget install --id Swift.Toolchain -e
       - run: swiftc -swift-version 6 -O hello.swift -o hello-windows
       - run: gzip hello-windows
