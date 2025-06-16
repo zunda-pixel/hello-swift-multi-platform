@@ -55,6 +55,7 @@ jobs:
       - name: Extract all files
         run: |
           cd artifacts
+          find ./ -maxdepth 3
           for dir in */ ; do
             echo $dir
           done
