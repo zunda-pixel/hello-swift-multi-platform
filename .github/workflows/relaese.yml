@@ -52,11 +52,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: ./artifacts
-      - name: Extract all zip files
+      - name: Extract all files
         run: |
           cd artifacts
           for dir in */ ; do
-            tar -zxvf "$dir"/*.tar.gz
+            echo $dir
           done
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
