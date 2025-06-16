@@ -55,8 +55,8 @@ jobs:
       - name: Extract all files
         run: |
           cd artifacts
-          find ./ -maxdepth 3
           for file in */*.gz; do
+            echo $file
             gzip -d "$file"
           done
       - name: Create GitHub Release
